@@ -1,5 +1,5 @@
 ![ProxyFlow](https://i.imgur.com/nfwkxNN.png)
-# Das all in one sicherheits system für deinen velocity proxy
+# Das all in one sicherheits System für deinen velocity Proxy
 
 ProxyFlow ist ein unverzichtbares Plugin für jeden Minecraft-Serverbetreiber, der einen Velocity-Proxy verwendet. Es kombiniert eine robuste Sicherheitssuite mit einem voll funktionsfähigen Wartungssystem, um deinen Server vor unerwünschten Verbindungen zu schützen und dir die volle Kontrolle zu geben.
 
