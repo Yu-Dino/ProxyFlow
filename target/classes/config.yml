@@ -1,0 +1,18 @@
+maintenance:
+  enabled: false
+  motd: "&4&lWartungs Arbeiten\n      &lBitte versuche es später erneut."
+  kick-message: "&cDer Server befindet sich aktuell im Wartungsmodus."
+  bypass-permission: "proxyflow.maintenance.bypass"
+security:
+  vpn-check:
+    enabled: true
+    #Hol dir einen API key von https://proxycheck.io
+    api-key: "DEIN_API_KEY_HIER"
+    bypass-permission: "proxyflow.security.vpn.bypass"
+  country-block:
+    enabled: false
+    mode: "blacklist"
+    countries:
+      - "example country 1"
+      - "example country 2"
+      - "example country 3"

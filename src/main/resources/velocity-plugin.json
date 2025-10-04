@@ -1,0 +1,10 @@
+{
+  "id": "proxyflow",
+  "name": "ProxyFlow",
+  "version": "1.1.2",
+  "description": "Ein Sicherheitsplugin für deinen Proxy!",
+  "authors": [
+    "Yu_Dino"
+  ],
+  "main": "net.yuflow.proxyFlow.plugin"
+}
