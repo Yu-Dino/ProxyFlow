@@ -13,7 +13,7 @@ Schütze dein Netzwerk proaktiv vor Bots, Angreifern und unerwünschten Spielern
 
 VPN & Proxy-Blocker: Verhindert, dass Spieler über anonyme Netzwerke (VPNs oder Proxies) beitreten. Ideal zur Abwehr von Bot-Angriffen und Umgehungen von Sperren. Hat eine bypass permission (Benötigt einen kostenlosen API-Key von proxycheck.io)
 
-Länder-Sperre (Geo-Blocking): Erstelle eine Blacklist, um Spieler aus bestimmten Ländern zu blockieren, oder eine Whitelist, um nur Spieler aus ausgewählten Ländern zuzulassen.
+Länder-Sperre): Erstelle eine Blacklist, um Spieler aus bestimmten Ländern zu blockieren, oder eine Whitelist, um nur Spieler aus ausgewählten Ländern zuzulassen.
 
 Anti-Bot-Schutz: Erkennt und blockiert verdächtig schnelle Verbindungsversuche und schützt vor ungültigen Spielernamen. Bei wiederholten Verstößen wird die IP-Adresse temporär gesperrt.
 
