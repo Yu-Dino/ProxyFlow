@@ -5,6 +5,10 @@ ProxyFlow ist ein unverzichtbares Plugin für jeden Minecraft-Serverbetreiber, d
 
 Entwickelt für Performance und einfache Bedienung, integriert sich ProxyFlow nahtlos in deine Infrastruktur und bietet sofortigen Schutz nach der Installation.
 
+**Support**
+Fragen und bugs gerne auf unserem discord stellen:
+https://discord.gg/DK8ZuTCwEC
+
 ## Features
 
 **Security System**
@@ -61,4 +65,3 @@ security:
       - "example country 1"
       - "example country 2"
       - "example country 3"
-´´´
