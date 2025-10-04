@@ -17,6 +17,8 @@ Länder-Sperre): Erstelle eine Blacklist, um Spieler aus bestimmten Ländern zu 
 
 Anti-Bot-Schutz: Erkennt und blockiert verdächtig schnelle Verbindungsversuche und schützt vor ungültigen Spielernamen. Bei wiederholten Verstößen wird die IP-Adresse temporär gesperrt.
 
+Packet-exploit-schutz: Erkennt ob ein Packet von einem spieler kommt, wenn nicht blockiert er sie einfach ohne weiteres.
+
 **Maintenance System**
 
 ![Maintenance motd](https://i.imgur.com/ejimV7c.png)
