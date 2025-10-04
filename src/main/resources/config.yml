@@ -1,6 +1,6 @@
 maintenance:
   enabled: false
-  motd: "&4&lWartungs Arbeiten\n      &lBitte versuche es später erneut."
+  motd: "               &4&lWartungs Arbeiten\n      &lBitte versuche es später erneut."
   kick-message: "&cDer Server befindet sich aktuell im Wartungsmodus."
   bypass-permission: "proxyflow.maintenance.bypass"
 security:
