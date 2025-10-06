@@ -45,17 +45,17 @@ public class plugin {
         this.server.getEventManager().register(this, new ConnectionListener(this.server, this.logger, this.configManager));
         this.server.getEventManager().register(this, new MaintenanceListener(this.configManager));
 
-        this.logger.info(" ");
-        this.logger.info(" _______  ______    _______  __   __  __   __  _______  ___      _______  _     _    __   __  ____  ");
-        this.logger.info("|       ||    _ |  |       ||  |_|  ||  | |  ||       ||   |    |       || | _ | |  |  | |  ||    | ");
-        this.logger.info("|    _  ||   | ||  |   _   ||       ||  |_|  ||    ___||   |    |   _   || || || |  |  |_|  | |   | ");
-        this.logger.info("|   |_| ||   |_||_ |  | |  ||       ||       ||   |___ |   |    |  | |  ||       |  |       | |   | ");
-        this.logger.info("|    ___||    __  ||  |_|  | |     | |_     _||    ___||   |___ |  |_|  ||       |  |       | |   | ");
-        this.logger.info("|   |    |   |  | ||       ||   _   |  |   |  |   |    |       ||       ||   _   |   |     |  |   | ");
-        this.logger.info("|___|    |___|  |_||_______||__| |__|  |___|  |___|    |_______||_______||__| |__|    |___|   |___| ");
-        this.logger.info(" ");
-        this.logger.info("                      ProxyFlow v1.1.2 powered by Yu_Dino");
-        this.logger.info("                         Plugin got fully initialised!");
-        this.logger.info(" ");
+        this.logger.info("                                                                                                              *+++++++++++");
+        this.logger.info(" _______  ______    _______  __   __  __   __  _______  ___      _______  _     _    __   __  ____          ++++++++++  +++*#########################");
+        this.logger.info("|       ||    _ |  |       ||  |_|  ||  | |  ||       ||   |    |       || | _ | |  |  | |  ||    |        ++++++++++  ++++++*************************");
+        this.logger.info("|    _  ||   | ||  |   _   ||       ||  |_|  ||    ___||   |    |   _   || || || |  |  |_|  | |   |       ++++++++++  ++++++++**********");
+        this.logger.info("|   |_| ||   |_||_ |  | |  ||       ||       ||   |___ |   |    |  | |  ||       |  |       | |   |      +++++++++*  +++++++++++****************** ***");
+        this.logger.info("|    ___||    __  ||  |_|  | |     | |_     _||    ___||   |___ |  |_|  ||       |  |       | |   |     +++          ++++++++++*****");
+        this.logger.info("|   |    |   |  | ||       ||   _   |  |   |  |   |    |       ||       ||   _   |   |     |  |   |     +++*++++++++  ++++++++****************************");
+        this.logger.info("|___|    |___|  |_||_______||__| |__|  |___|  |___|    |_______||_______||__| |__|    |___|   |___|      ++++++++++++   +++++*****************************");
+        this.logger.info("                                                                                                          *+++++++++++*  +++****************");
+        this.logger.info("                  ProxyFlow-Velocity v1.1.2 powered by Yu_Dino                                              +++++++++++++++*************************");
+        this.logger.info("                         Plugin got fully initialised!                                                        ++++++++++++");
+        this.logger.info("                                                                                                                +");
     }
 }
