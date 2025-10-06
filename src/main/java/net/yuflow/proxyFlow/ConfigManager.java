@@ -39,7 +39,7 @@ public class ConfigManager {
                     if (in != null) {
                         Files.copy(in, configFile, new CopyOption[0]);
                     } else {
-                        logger.error("Die Standard-Konfigurationsdatei 'config.yml' konnte nicht in den Ressourcen gefunden werden!");
+                        logger.error("the standard config could not be found.");
                     }
                 } catch (Throwable var8) {
                     if (in != null) {
@@ -57,7 +57,7 @@ public class ConfigManager {
                     in.close();
                 }
             } catch (IOException var9) {
-                logger.error("Konnte die Standard-Konfigurationsdatei nicht erstellen!", var9);
+                logger.error("cant create config.yml!", var9);
             }
         }
 
@@ -68,7 +68,7 @@ public class ConfigManager {
         try {
             this.root = (CommentedConfigurationNode)this.loader.load();
         } catch (ConfigurateException var2) {
-            this.logger.error("Fehler beim Laden der Konfiguration!", var2);
+            this.logger.error("Failed to load configuration!", var2);
         }
 
     }
@@ -77,7 +77,7 @@ public class ConfigManager {
         try {
             this.loader.save(this.root);
         } catch (ConfigurateException e) {
-            this.logger.error("Fehler beim Speichern der Konfiguration!", e);
+            this.logger.error("Failed to safe configuration!", e);
         }
     }
 
@@ -90,7 +90,7 @@ public class ConfigManager {
             this.root.node("maintenance", "enabled").set(enabled);
             saveConfig();
         } catch (SerializationException e) {
-            logger.error("Konnte den Wartungsstatus nicht in die Konfiguration schreiben!", e);
+            logger.error("cant write maintenance state in configuration!", e);
         }
     }
 
@@ -99,7 +99,7 @@ public class ConfigManager {
     }
 
     public String getMaintenanceKickMessage() {
-        return ((CommentedConfigurationNode)this.root.node(new Object[]{"maintenance", "kick-message"})).getString("&cDer Server befindet sich im Wartungsmodus.");
+        return ((CommentedConfigurationNode)this.root.node(new Object[]{"maintenance", "kick-message"})).getString("&cThis server is currently in maintenance");
     }
 
     public String getMaintenanceBypassPermission() {

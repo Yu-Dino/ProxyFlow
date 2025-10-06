@@ -14,7 +14,7 @@ public class ReloadCommand implements SimpleCommand {
 
     public void execute(Invocation invocation) {
         this.configManager.loadConfig();
-        invocation.source().sendMessage(Component.text("ProxyFlow Konfiguration wurde neu geladen!", NamedTextColor.GREEN));
+        invocation.source().sendMessage(Component.text("ProxyFlow configuration got reloaded!", NamedTextColor.GREEN));
     }
 
     public boolean hasPermission(Invocation invocation) {

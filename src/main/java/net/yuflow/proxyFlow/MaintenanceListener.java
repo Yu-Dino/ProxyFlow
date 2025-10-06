@@ -18,7 +18,7 @@ public class MaintenanceListener {
         if (configManager.isMaintenanceEnabled()) {
             ServerPing.Builder builder = event.getPing().asBuilder();
             builder.description(LegacyComponentSerializer.legacyAmpersand().deserialize(configManager.getMaintenanceMotd()));
-            builder.version(new ServerPing.Version(-1, "Wartung"));
+            builder.version(new ServerPing.Version(-1, "maintenance"));
             builder.maximumPlayers(0);
             builder.onlinePlayers(0);
             event.setPing(builder.build());

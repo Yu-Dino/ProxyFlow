@@ -39,7 +39,7 @@ public class plugin {
         CommandMeta reloadMeta = commandManager.metaBuilder("proxyflow").aliases("pf").build();
         commandManager.register(reloadMeta, new ReloadCommand(this.configManager));
 
-        CommandMeta maintenanceMeta = commandManager.metaBuilder("maintenance").aliases("wartung").build();
+        CommandMeta maintenanceMeta = commandManager.metaBuilder("maintenance").aliases("maintenance").build();
         commandManager.register(maintenanceMeta, new MaintenanceCommand(this.configManager, this.server));
 
         this.server.getEventManager().register(this, new ConnectionListener(this.server, this.logger, this.configManager));
@@ -55,7 +55,7 @@ public class plugin {
         this.logger.info("|___|    |___|  |_||_______||__| |__|  |___|  |___|    |_______||_______||__| |__|    |___|   |___| ");
         this.logger.info(" ");
         this.logger.info("                      ProxyFlow v1.1.2 powered by Yu_Dino");
-        this.logger.info("                     Plugin wurde erfolgreich initialisiert!");
+        this.logger.info("                         Plugin got fully initialised!");
         this.logger.info(" ");
     }
 }

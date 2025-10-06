@@ -25,7 +25,7 @@ public class MaintenanceCommand implements SimpleCommand {
         configManager.setMaintenance(newState);
 
         if (newState) {
-            invocation.source().sendMessage(Component.text("Wartungsmodus wurde aktiviert.", NamedTextColor.YELLOW));
+            invocation.source().sendMessage(Component.text("This server is now in maintenance mode", NamedTextColor.YELLOW));
 
             Component kickMessage = LegacyComponentSerializer.legacyAmpersand().deserialize(configManager.getMaintenanceKickMessage());
             String bypassPermission = configManager.getMaintenanceBypassPermission();
@@ -36,7 +36,7 @@ public class MaintenanceCommand implements SimpleCommand {
                 }
             }
         } else {
-            invocation.source().sendMessage(Component.text("Wartungsmodus wurde deaktiviert.", NamedTextColor.GREEN));
+            invocation.source().sendMessage(Component.text("This server is no longer in maintenance mode", NamedTextColor.GREEN));
         }
     }
 
