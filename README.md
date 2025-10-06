@@ -1,9 +1,13 @@
 ![ProxyFlow](https://i.imgur.com/nfwkxNN.png)
-# Das all in one sicherheits system für deinen velocity proxy
+# Das all in one sicherheits System für deinen velocity Proxy
 
 ProxyFlow ist ein unverzichtbares Plugin für jeden Minecraft-Serverbetreiber, der einen Velocity-Proxy verwendet. Es kombiniert eine robuste Sicherheitssuite mit einem voll funktionsfähigen Wartungssystem, um deinen Server vor unerwünschten Verbindungen zu schützen und dir die volle Kontrolle zu geben.
 
 Entwickelt für Performance und einfache Bedienung, integriert sich ProxyFlow nahtlos in deine Infrastruktur und bietet sofortigen Schutz nach der Installation.
+
+**Support**
+Fragen und bugs gerne auf unserem discord stellen:
+https://discord.gg/DK8ZuTCwEC
 
 ## Features
 
@@ -13,9 +17,11 @@ Schütze dein Netzwerk proaktiv vor Bots, Angreifern und unerwünschten Spielern
 
 VPN & Proxy-Blocker: Verhindert, dass Spieler über anonyme Netzwerke (VPNs oder Proxies) beitreten. Ideal zur Abwehr von Bot-Angriffen und Umgehungen von Sperren. Hat eine bypass permission (Benötigt einen kostenlosen API-Key von proxycheck.io)
 
-Länder-Sperre (Geo-Blocking): Erstelle eine Blacklist, um Spieler aus bestimmten Ländern zu blockieren, oder eine Whitelist, um nur Spieler aus ausgewählten Ländern zuzulassen.
+Länder-Sperre): Erstelle eine Blacklist, um Spieler aus bestimmten Ländern zu blockieren, oder eine Whitelist, um nur Spieler aus ausgewählten Ländern zuzulassen.
 
 Anti-Bot-Schutz: Erkennt und blockiert verdächtig schnelle Verbindungsversuche und schützt vor ungültigen Spielernamen. Bei wiederholten Verstößen wird die IP-Adresse temporär gesperrt.
+
+Packet-exploit-schutz: Erkennt ob ein Packet von einem spieler kommt, wenn nicht blockiert er sie einfach ohne weiteres.
 
 **Maintenance System**
 
@@ -59,4 +65,3 @@ security:
       - "example country 1"
       - "example country 2"
       - "example country 3"
-´´´
