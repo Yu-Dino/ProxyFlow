@@ -1,6 +1,0 @@
-net\yuflow\proxyFlow\MaintenanceListener.class
-net\yuflow\proxyFlow\ReloadCommand.class
-net\yuflow\proxyFlow\ConnectionListener.class
-net\yuflow\proxyFlow\ConfigManager.class
-net\yuflow\proxyFlow\MaintenanceCommand.class
-net\yuflow\proxyFlow\plugin.class
