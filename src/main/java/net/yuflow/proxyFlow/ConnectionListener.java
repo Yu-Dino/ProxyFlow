@@ -85,6 +85,14 @@ public class ConnectionListener {
 
                     if (this.configManager.isVpnCheckEnabled() && ipInfo.has("proxy") && "yes".equals(ipInfo.get("proxy").getAsString())) {
                         if (!configManager.isPlayerVpnWhitelisted(username)) {
+                            String type = ipInfo.has("type") ? ipInfo.get("type").getAsString() : "unknown";
+
+                            if (configManager.isBlockServerIps() && "hosting".equalsIgnoreCase(type)) {
+                                this.deny(event, "Server IPs are not allowed!", "[ProxyFlow] Server/Hosting IP detected from {} for player {}. Join cancelled!", ipAddress, username);
+                                notifyAdmins(username, ipAddress, "Server/Hosting IP");
+                                return true;
+                            }
+
                             this.vpnIpCache.add(ipAddress);
                         }
                     }
@@ -126,6 +134,7 @@ public class ConnectionListener {
             if (!player.hasPermission(configManager.getVpnBypassPermission())) {
                 event.setResult(ComponentResult.denied(Component.text("VPNs or Proxys are not allowed on this server").color(NamedTextColor.RED)));
                 logger.warn("[ProxyFlow] VPN/Proxy from IP {} for Player {} blocked. Join cancelled!.", playerIp, playerName);
+                notifyAdmins(playerName, playerIp, "VPN/Proxy");
                 return;
             }
         }
@@ -186,6 +195,25 @@ public class ConnectionListener {
             }
 
             this.logger.info("[ProxyFlow] Player {} (IP: {}) had all checks passed. no risks found!", playerName, playerIp);
+        }
+    }
+
+    private void notifyAdmins(String playerName, String ipAddress, String reason) {
+        if (!configManager.isNotifyAdmins()) {
+            return;
+        }
+
+        Component message = Component.text("[ProxyFlow] ", NamedTextColor.RED)
+                .append(Component.text("Player ", NamedTextColor.GRAY))
+                .append(Component.text(playerName, NamedTextColor.YELLOW))
+                .append(Component.text(" tried to join with ", NamedTextColor.GRAY))
+                .append(Component.text(reason, NamedTextColor.RED))
+                .append(Component.text(" (IP: " + ipAddress + ")", NamedTextColor.DARK_GRAY));
+
+        for (Player onlinePlayer : server.getAllPlayers()) {
+            if (onlinePlayer.hasPermission("proxyflow.notify")) {
+                onlinePlayer.sendMessage(message);
+            }
         }
     }
 

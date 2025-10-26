@@ -32,6 +32,8 @@ security:
     whitelisted-players:
       - "ExamplePlayer1"
       - "ExamplePlayer2"
+    block-server-ips: true
+    notify-admins: true
 
   country-block:
     enabled: false

@@ -232,6 +232,32 @@ public class ConfigManager {
                 .anyMatch(p -> p.equalsIgnoreCase(username));
     }
 
+    public boolean isBlockServerIps() {
+        return ((CommentedConfigurationNode)this.root.node(new Object[]{"security", "vpn-check", "block-server-ips"})).getBoolean(true);
+    }
+
+    public void setBlockServerIps(boolean enabled) {
+        try {
+            this.root.node("security", "vpn-check", "block-server-ips").set(enabled);
+            saveConfig();
+        } catch (SerializationException e) {
+            logger.error("cant write block-server-ips state in configuration!", e);
+        }
+    }
+
+    public boolean isNotifyAdmins() {
+        return ((CommentedConfigurationNode)this.root.node(new Object[]{"security", "vpn-check", "notify-admins"})).getBoolean(true);
+    }
+
+    public void setNotifyAdmins(boolean enabled) {
+        try {
+            this.root.node("security", "vpn-check", "notify-admins").set(enabled);
+            saveConfig();
+        } catch (SerializationException e) {
+            logger.error("cant write notify-admins state in configuration!", e);
+        }
+    }
+
     public boolean isCountryBlockEnabled() {
         return ((CommentedConfigurationNode)this.root.node(new Object[]{"security", "country-block", "enabled"})).getBoolean(false);
     }
