@@ -71,7 +71,7 @@ public class plugin {
         this.logger.info("|   |    |   |  | ||       ||   _   |  |   |  |   |    |       ||       ||   _   |   |     |  |   |     +++*++++++++  ++++++++****************************");
         this.logger.info("|___|    |___|  |_||_______||__| |__|  |___|  |___|    |_______||_______||__| |__|    |___|   |___|      ++++++++++++   +++++*****************************");
         this.logger.info("                                                                                                          *+++++++++++*  +++****************");
-        this.logger.info("                  ProxyFlow-Velocity v1.3.0 powered by Yu_Dino                                              +++++++++++++++*************************");
+        this.logger.info("                  ProxyFlow-Velocity v1.1.3 powered by Yu_Dino                                              +++++++++++++++*************************");
         this.logger.info("                         Plugin got fully initialised!                                                        ++++++++++++");
     }
 }
