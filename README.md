@@ -48,20 +48,42 @@ Einfacher Befehl: Schalte den Wartungsmodus mit /maintenance blitzschnell an ode
 **Konfigurations Datei**
 ```
 maintenance:
-  enabled: false
-  motd: "&4&lWartungs Arbeiten\n      &lBitte versuche es später erneut."
-  kick-message: "&cDer Server befindet sich aktuell im Wartungsmodus."
-  bypass-permission: "proxyflow.maintenance.bypass"
-security:
-  vpn-check:
-    enabled: true
-    #Hol dir einen API key von https://proxycheck.io
-    api-key: "DEIN_API_KEY_HIER"
-    bypass-permission: "proxyflow.security.vpn.bypass"
-  country-block:
     enabled: false
-    mode: "blacklist"
-    countries:
-      - "example country 1"
-      - "example country 2"
-      - "example country 3"
+    motd: |4-
+                       &4&lServer is in maintenance!
+            &lPlease try again later
+    kick-message: '&cThis server is currently in maintenance'
+    bypass-permission: proxyflow.maintenance.bypass
+whitelist:
+    enabled: false
+    kick-message: '&cYou are not whitelisted on this server!'
+    players: [Notch, Dinnerbone]
+    bypass-permission: proxyflow.whitelist.bypass
+queue:
+    enabled: false
+    max-players: 100
+    queue-server: queue
+    target-server: lobby
+    queue-message: '&eYou are in queue... Position: &6{position}&e/&6{total}'
+    bypass-permission: proxyflow.queue.bypass
+    priority-permissions: {proxyflow.queue.priority.high: 100, proxyflow.queue.priority.medium: 50,
+        proxyflow.queue.priority.low: 10}
+security:
+    vpn-check:
+        enabled: true
+        api-key: API KEY
+        bypass-permission: proxyflow.security.vpn.bypass
+        whitelisted-players: [ExamplePlayer1, ExamplePlayer2]
+        block-server-ips: true
+        notify-admins: true
+    country-block:
+        enabled: false
+        mode: blacklist
+        countries: [example country 1, example country 2, example country 3]
+    multi-account:
+        enabled: true
+        bypass-permission: proxyflow.security.multiaccount.bypass
+        action: kick
+        kick-message: '&cA player with your IP address is already on this server'
+        whitelisted-players: [ExamplePlayer1, ExamplePlayer2]
+
