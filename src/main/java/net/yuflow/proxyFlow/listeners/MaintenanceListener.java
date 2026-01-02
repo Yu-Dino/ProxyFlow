@@ -1,12 +1,12 @@
-package net.yuflow.proxyFlow;
+package net.yuflow.proxyFlow.listeners;
 
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyPingEvent;
 import com.velocitypowered.api.proxy.server.ServerPing;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.yuflow.proxyFlow.config.ConfigManager;
 
 public class MaintenanceListener {
-
     private final ConfigManager configManager;
 
     public MaintenanceListener(ConfigManager configManager) {

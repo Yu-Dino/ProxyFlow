@@ -1,6 +1,6 @@
 maintenance:
   enabled: false
-  motd: "               &4&lServer is in maintenance!\n    &lPlease try again later"
+  motd: "&4&lServer is in maintenance!\n&lPlease try again later"
   kick-message: "&cThis server is currently in maintenance"
   bypass-permission: "proxyflow.maintenance.bypass"
 
@@ -9,7 +9,6 @@ whitelist:
   kick-message: "&cYou are not whitelisted on this server!"
   players:
     - "Notch"
-    - "Dinnerbone"
   bypass-permission: "proxyflow.whitelist.bypass"
 
 queue:
@@ -22,32 +21,37 @@ queue:
   priority-permissions:
     "proxyflow.queue.priority.high": 100
     "proxyflow.queue.priority.medium": 50
-    "proxyflow.queue.priority.low": 10
 
 security:
   vpn-check:
     enabled: true
-    api-key: "API KEY"
+    api-key: ""
     bypass-permission: "proxyflow.security.vpn.bypass"
-    whitelisted-players:
-      - "ExamplePlayer1"
-      - "ExamplePlayer2"
+    cache-time-minutes: 60
+    whitelisted-players: []
     block-server-ips: true
     notify-admins: true
 
   country-block:
     enabled: false
     mode: "blacklist"
-    countries:
-      - "example country 1"
-      - "example country 2"
-      - "example country 3"
+    countries: []
 
   multi-account:
     enabled: true
     bypass-permission: "proxyflow.security.multiaccount.bypass"
     action: "kick"
     kick-message: "&cA player with your IP address is already on this server"
-    whitelisted-players:
-      - "ExamplePlayer1"
-      - "ExamplePlayer2"
+    whitelisted-players: []
+
+discord:
+  enabled: false
+  webhook-url: ""
+  notify-vpn: true
+  notify-maintenance: true
+  notify-bans: true
+
+staff-chat:
+  enabled: true
+  format: "&8[&cSC&8] &e{player}&8: &f{message}"
+  permission: "proxyflow.staffchat"

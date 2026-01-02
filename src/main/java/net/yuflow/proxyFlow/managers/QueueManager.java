@@ -1,10 +1,11 @@
-package net.yuflow.proxyFlow;
+package net.yuflow.proxyFlow.managers;
 
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.yuflow.proxyFlow.config.ConfigManager;
 import org.slf4j.Logger;
 
 import java.util.*;
@@ -28,9 +29,7 @@ public class QueueManager {
     }
 
     public void addToQueue(Player player) {
-        if (playerEntries.containsKey(player.getUniqueId())) {
-            return;
-        }
+        if (playerEntries.containsKey(player.getUniqueId())) return;
 
         int priority = getPriority(player);
         QueueEntry entry = new QueueEntry(player, priority);
@@ -49,32 +48,23 @@ public class QueueManager {
         }
     }
 
-    public boolean isInQueue(UUID playerId) {
-        return playerEntries.containsKey(playerId);
-    }
+    public boolean isInQueue(UUID playerId) { return playerEntries.containsKey(playerId); }
 
     public int getPosition(UUID playerId) {
         QueueEntry entry = playerEntries.get(playerId);
-        if (entry == null) {
-            return -1;
-        }
+        if (entry == null) return -1;
 
         List<QueueEntry> sortedQueue = new ArrayList<>(queue);
-        sortedQueue.sort(Comparator.comparingInt(QueueEntry::getPriority).reversed()
-                .thenComparingLong(QueueEntry::getTimestamp));
+        sortedQueue.sort(Comparator.comparingInt(QueueEntry::getPriority).reversed().thenComparingLong(QueueEntry::getTimestamp));
 
         for (int i = 0; i < sortedQueue.size(); i++) {
-            if (sortedQueue.get(i).getPlayer().getUniqueId().equals(playerId)) {
-                return i + 1;
-            }
+            if (sortedQueue.get(i).getPlayer().getUniqueId().equals(playerId)) return i + 1;
         }
         return -1;
     }
 
     public void processQueue() {
-        if (!configManager.isQueueEnabled() || processingQueue) {
-            return;
-        }
+        if (!configManager.isQueueEnabled() || processingQueue) return;
 
         processingQueue = true;
         try {
@@ -88,8 +78,7 @@ public class QueueManager {
 
             int maxPlayers = configManager.getQueueMaxPlayers();
             int currentPlayers = (int) server.getAllPlayers().stream()
-                    .filter(p -> p.getCurrentServer().isPresent()
-                            && p.getCurrentServer().get().getServerInfo().getName().equals(targetServerName))
+                    .filter(p -> p.getCurrentServer().isPresent() && p.getCurrentServer().get().getServerInfo().getName().equals(targetServerName))
                     .count();
 
             while (!queue.isEmpty() && currentPlayers < maxPlayers) {
@@ -107,7 +96,6 @@ public class QueueManager {
                 logger.info("[ProxyFlow] Player {} sent from queue to {}", player.getUsername(), targetServerName);
                 currentPlayers++;
             }
-
             updateQueueMessages();
         } finally {
             processingQueue = false;
@@ -115,19 +103,12 @@ public class QueueManager {
     }
 
     private int getPriority(Player player) {
-        if (player.hasPermission(configManager.getQueueBypassPermission())) {
-            return Integer.MAX_VALUE;
-        }
-
+        if (player.hasPermission(configManager.getQueueBypassPermission())) return Integer.MAX_VALUE;
         Map<String, Integer> priorities = configManager.getQueuePriorityPermissions();
         int maxPriority = 0;
-
         for (Map.Entry<String, Integer> priorityEntry : priorities.entrySet()) {
-            if (player.hasPermission(priorityEntry.getKey())) {
-                maxPriority = Math.max(maxPriority, priorityEntry.getValue());
-            }
+            if (player.hasPermission(priorityEntry.getKey())) maxPriority = Math.max(maxPriority, priorityEntry.getValue());
         }
-
         return maxPriority;
     }
 
@@ -139,18 +120,10 @@ public class QueueManager {
             Player player = entry.getPlayer();
             if (player.isActive()) {
                 int position = getPosition(player.getUniqueId());
-                String message = messageTemplate
-                        .replace("{position}", String.valueOf(position))
-                        .replace("{total}", String.valueOf(totalInQueue));
-
-                Component component = LegacyComponentSerializer.legacyAmpersand().deserialize(message);
-                player.sendActionBar(component);
+                String message = messageTemplate.replace("{position}", String.valueOf(position)).replace("{total}", String.valueOf(totalInQueue));
+                player.sendActionBar(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
             }
         }
-    }
-
-    public int getQueueSize() {
-        return queue.size();
     }
 
     private static class QueueEntry implements Comparable<QueueEntry> {
@@ -164,24 +137,14 @@ public class QueueManager {
             this.timestamp = System.currentTimeMillis();
         }
 
-        public Player getPlayer() {
-            return player;
-        }
-
-        public int getPriority() {
-            return priority;
-        }
-
-        public long getTimestamp() {
-            return timestamp;
-        }
+        public Player getPlayer() { return player; }
+        public int getPriority() { return priority; }
+        public long getTimestamp() { return timestamp; }
 
         @Override
         public int compareTo(QueueEntry other) {
             int priorityCompare = Integer.compare(other.priority, this.priority);
-            if (priorityCompare != 0) {
-                return priorityCompare;
-            }
+            if (priorityCompare != 0) return priorityCompare;
             return Long.compare(this.timestamp, other.timestamp);
         }
     }

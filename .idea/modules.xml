@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/proxyflow.iml" filepath="$PROJECT_DIR$/proxyflow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/proxyFlow.iml" filepath="$PROJECT_DIR$/proxyFlow.iml" />
     </modules>
   </component>
 </project>

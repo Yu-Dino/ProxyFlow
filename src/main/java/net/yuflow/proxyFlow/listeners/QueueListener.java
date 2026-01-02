@@ -1,4 +1,4 @@
-package net.yuflow.proxyFlow;
+package net.yuflow.proxyFlow.listeners;
 
 import com.velocitypowered.api.event.PostOrder;
 import com.velocitypowered.api.event.Subscribe;
@@ -6,6 +6,8 @@ import com.velocitypowered.api.event.connection.DisconnectEvent;
 import com.velocitypowered.api.event.player.ServerConnectedEvent;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
+import net.yuflow.proxyFlow.config.ConfigManager;
+import net.yuflow.proxyFlow.managers.QueueManager;
 import org.slf4j.Logger;
 
 public class QueueListener {
@@ -23,17 +25,14 @@ public class QueueListener {
 
     @Subscribe(order = PostOrder.LATE)
     public void onServerConnected(ServerConnectedEvent event) {
-        if (!configManager.isQueueEnabled()) {
-            return;
-        }
+        if (!configManager.isQueueEnabled()) return;
 
         Player player = event.getPlayer();
         String targetServer = configManager.getQueueTargetServer();
         String queueServer = configManager.getQueueServer();
         String connectedServer = event.getServer().getServerInfo().getName();
 
-        if (event.getPreviousServer().isPresent()
-                && event.getPreviousServer().get().getServerInfo().getName().equals(targetServer)) {
+        if (event.getPreviousServer().isPresent() && event.getPreviousServer().get().getServerInfo().getName().equals(targetServer)) {
             queueManager.processQueue();
         }
 
@@ -41,31 +40,25 @@ public class QueueListener {
             if (!player.hasPermission(configManager.getQueueBypassPermission())) {
                 int maxPlayers = configManager.getQueueMaxPlayers();
                 long currentPlayers = server.getAllPlayers().stream()
-                        .filter(p -> p.getCurrentServer().isPresent()
-                                && p.getCurrentServer().get().getServerInfo().getName().equals(targetServer))
+                        .filter(p -> p.getCurrentServer().isPresent() && p.getCurrentServer().get().getServerInfo().getName().equals(targetServer))
                         .count();
 
                 if (currentPlayers >= maxPlayers) {
                     queueManager.addToQueue(player);
                 } else {
-                    server.getServer(targetServer).ifPresent(target ->
-                            player.createConnectionRequest(target).fireAndForget());
+                    server.getServer(targetServer).ifPresent(target -> player.createConnectionRequest(target).fireAndForget());
                 }
             } else {
-                server.getServer(targetServer).ifPresent(target ->
-                        player.createConnectionRequest(target).fireAndForget());
+                server.getServer(targetServer).ifPresent(target -> player.createConnectionRequest(target).fireAndForget());
             }
         }
     }
 
     @Subscribe
     public void onDisconnect(DisconnectEvent event) {
-        if (!configManager.isQueueEnabled()) {
-            return;
-        }
+        if (!configManager.isQueueEnabled()) return;
 
         Player player = event.getPlayer();
-
         if (queueManager.isInQueue(player.getUniqueId())) {
             queueManager.removeFromQueue(player.getUniqueId());
         }
@@ -73,7 +66,6 @@ public class QueueListener {
         if (player.getCurrentServer().isPresent()) {
             String targetServer = configManager.getQueueTargetServer();
             String currentServer = player.getCurrentServer().get().getServerInfo().getName();
-
             if (currentServer.equals(targetServer)) {
                 queueManager.processQueue();
             }

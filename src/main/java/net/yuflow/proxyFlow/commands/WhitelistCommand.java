@@ -1,9 +1,9 @@
-package net.yuflow.proxyFlow;
+package net.yuflow.proxyFlow.commands;
 
 import com.velocitypowered.api.command.SimpleCommand;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-
+import net.yuflow.proxyFlow.config.ConfigManager;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -28,12 +28,10 @@ public class WhitelistCommand implements SimpleCommand {
                 configManager.setWhitelistEnabled(true);
                 invocation.source().sendMessage(Component.text("Whitelist enabled!", NamedTextColor.GREEN));
                 break;
-
             case "off":
                 configManager.setWhitelistEnabled(false);
                 invocation.source().sendMessage(Component.text("Whitelist disabled!", NamedTextColor.RED));
                 break;
-
             case "add":
                 if (args.length < 2) {
                     invocation.source().sendMessage(Component.text("Usage: /whitelist add <player>", NamedTextColor.RED));
@@ -42,7 +40,6 @@ public class WhitelistCommand implements SimpleCommand {
                 configManager.addWhitelistPlayer(args[1]);
                 invocation.source().sendMessage(Component.text("Player " + args[1] + " added to whitelist!", NamedTextColor.GREEN));
                 break;
-
             case "remove":
                 if (args.length < 2) {
                     invocation.source().sendMessage(Component.text("Usage: /whitelist remove <player>", NamedTextColor.RED));
@@ -54,7 +51,6 @@ public class WhitelistCommand implements SimpleCommand {
                     invocation.source().sendMessage(Component.text("Player " + args[1] + " is not on the whitelist!", NamedTextColor.RED));
                 }
                 break;
-
             case "list":
                 List<String> players = configManager.getWhitelistPlayers();
                 if (players.isEmpty()) {
@@ -66,7 +62,6 @@ public class WhitelistCommand implements SimpleCommand {
                     }
                 }
                 break;
-
             default:
                 sendHelp(invocation);
                 break;
@@ -91,15 +86,9 @@ public class WhitelistCommand implements SimpleCommand {
     public List<String> suggest(Invocation invocation) {
         String[] args = invocation.arguments();
         List<String> suggestions = new ArrayList<>();
-
         if (args.length == 0 || args.length == 1) {
-            suggestions.add("on");
-            suggestions.add("off");
-            suggestions.add("add");
-            suggestions.add("remove");
-            suggestions.add("list");
+            suggestions.add("on"); suggestions.add("off"); suggestions.add("add"); suggestions.add("remove"); suggestions.add("list");
         }
-
         return suggestions;
     }
 }

@@ -1,4 +1,4 @@
-package net.yuflow.proxyFlow;
+package net.yuflow.proxyFlow.commands;
 
 import com.velocitypowered.api.command.SimpleCommand;
 import com.velocitypowered.api.proxy.Player;
@@ -6,37 +6,41 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.yuflow.proxyFlow.config.ConfigManager;
+import net.yuflow.proxyFlow.services.DiscordService;
 
 public class MaintenanceCommand implements SimpleCommand {
-
     private final ConfigManager configManager;
     private final ProxyServer server;
+    private final DiscordService discordService;
 
-    public MaintenanceCommand(ConfigManager configManager, ProxyServer server) {
+    public MaintenanceCommand(ConfigManager configManager, ProxyServer server, DiscordService discordService) {
         this.configManager = configManager;
         this.server = server;
+        this.discordService = discordService;
     }
 
     @Override
     public void execute(Invocation invocation) {
-        boolean currentState = configManager.isMaintenanceEnabled();
-        boolean newState = !currentState;
-
+        boolean newState = !configManager.isMaintenanceEnabled();
         configManager.setMaintenance(newState);
 
         if (newState) {
-            invocation.source().sendMessage(Component.text("This server is now in maintenance mode", NamedTextColor.YELLOW));
-
+            invocation.source().sendMessage(Component.text("Maintenance mode ENABLED", NamedTextColor.YELLOW));
+            if (configManager.isDiscordNotifyMaintenance()) {
+                discordService.sendNotification("Maintenance Update", "Maintenance mode has been **ENABLED**.", 16776960);
+            }
             Component kickMessage = LegacyComponentSerializer.legacyAmpersand().deserialize(configManager.getMaintenanceKickMessage());
-            String bypassPermission = configManager.getMaintenanceBypassPermission();
-
             for (Player player : server.getAllPlayers()) {
-                if (!player.hasPermission(bypassPermission)) {
+                if (!player.hasPermission(configManager.getMaintenanceBypassPermission())) {
                     player.disconnect(kickMessage);
                 }
             }
         } else {
-            invocation.source().sendMessage(Component.text("This server is no longer in maintenance mode", NamedTextColor.GREEN));
+            invocation.source().sendMessage(Component.text("Maintenance mode DISABLED", NamedTextColor.GREEN));
+            if (configManager.isDiscordNotifyMaintenance()) {
+                discordService.sendNotification("Maintenance Update", "Maintenance mode has been **DISABLED**.", 65280);
+            }
         }
     }
 
