@@ -52,7 +52,7 @@
     </dependencies>
 
     <build>
-        <finalName>proxyflow-${project.version}</finalName>
+        <finalName>ProxyFlow-${project.version}+dependencies</finalName>
         <defaultGoal>clean package</defaultGoal>
         <resources>
             <resource>
@@ -95,10 +95,6 @@
                                 <relocation>
                                     <pattern>org.yaml.snakeyaml</pattern>
                                     <shadedPattern>net.yuflow.proxyflow.libs.snakeyaml</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>org.sqlite</pattern>
-                                    <shadedPattern>net.yuflow.proxyflow.libs.sqlite</shadedPattern>
                                 </relocation>
                             </relocations>
                             <filters>
