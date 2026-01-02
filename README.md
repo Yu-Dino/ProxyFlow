@@ -1,89 +1,157 @@
-![ProxyFlow](https://i.imgur.com/nfwkxNN.png)
-# Das all in one sicherheits System für deinen velocity Proxy
+![ProxyFlow](https://i.imgur.com/nfwkxNN.png) 
+# The All-in-One Security System for your Velocity Proxy
 
-ProxyFlow ist ein unverzichtbares Plugin für jeden Minecraft-Serverbetreiber, der einen Velocity-Proxy verwendet. Es kombiniert eine robuste Sicherheitssuite mit einem voll funktionsfähigen Wartungssystem, um deinen Server vor unerwünschten Verbindungen zu schützen und dir die volle Kontrolle zu geben.
+**ProxyFlow** is the ultimate security solution for Minecraft server networks based on Velocity. Version 1.4.0 introduces massive performance improvements through **Asynchronous Processing**, **Caching**, and **Database Support**.
 
-Entwickelt für Performance und einfache Bedienung, integriert sich ProxyFlow nahtlos in deine Infrastruktur und bietet sofortigen Schutz nach der Installation.
+It proactively protects your network from bot attacks, VPN bypasses, and exploits while providing your team with essential tools like a global StaffChat and Discord integration.
 
-**Support**
-Fragen und bugs gerne auf unserem discord stellen:
-https://discord.gg/DK8ZuTCwEC
+**Support & Community**
+Questions, bugs, or feature requests? Join our Discord:
+[https://discord.gg/DK8ZuTCwEC](https://discord.gg/DK8ZuTCwEC)
+
+---
 
 ## Features
 
-**Security System**
+### Security System
 
-Schütze dein Netzwerk proaktiv vor Bots, Angreifern und unerwünschten Spielern, bevor sie überhaupt einen deiner Server erreichen.
+Protect your network before malicious connections even reach your backend servers.
 
-VPN & Proxy-Blocker: Verhindert, dass Spieler über anonyme Netzwerke (VPNs oder Proxies) beitreten. Ideal zur Abwehr von Bot-Angriffen und Umgehungen von Sperren. Hat eine bypass permission (Benötigt einen kostenlosen API-Key von proxycheck.io)
-
-Länder-Sperre): Erstelle eine Blacklist, um Spieler aus bestimmten Ländern zu blockieren, oder eine Whitelist, um nur Spieler aus ausgewählten Ländern zuzulassen.
-
-Anti-Bot-Schutz: Erkennt und blockiert verdächtig schnelle Verbindungsversuche und schützt vor ungültigen Spielernamen. Bei wiederholten Verstößen wird die IP-Adresse temporär gesperrt.
-
-Packet-exploit-schutz: Erkennt ob ein Packet von einem spieler kommt, wenn nicht blockiert er sie einfach ohne weiteres.
-
-**Maintenance System**
-
-![Maintenance motd](https://i.imgur.com/ejimV7c.png)
-MOTD: Zeigt eine benutzerdefinierte Nachricht (MOTD) in der Serverliste an, wenn die Wartung aktiv ist. Unterstützt Farbcodes und mehrzeilige Anzeigen.
-
-Spielerkick: Kickt alle Spieler, die nicht die Berechtigung haben, während der Wartung online zu sein.
-
-Bypass-Permission: Vergieb eine spezielle Berechtigung an Teammitglieder, damit diese den Server auch während der Wartungsarbeiten betreten können.
-
-Einfacher Befehl: Schalte den Wartungsmodus mit /maintenance blitzschnell an oder aus.
+* **Intelligent VPN & Proxy Blocker:**
+* Blocks connections via anonymous networks (VPNs/Proxies).
+* **NEW:** Uses an intelligent **Caching System** (stores results for X minutes) to save API limits and prevent join lag.
+* Requires a free API key from [proxycheck.io](https://proxycheck.io).
 
 
-### Installation & Konfiguration
+* **Persistent Punishments (SQLite):**
+* **NEW:** Temporary bans (e.g., triggered by Anti-Bot) are now stored in a local SQLite database (`database.db`). Bans remain active even after a proxy restart!
 
-1. Lade ProxyFlow herunter.
 
-2. Platziere die Datei in den plugins-Ordner deines Velocity-Proxys.
+* **Country Blocker (GeoIP):** Whitelist or Blacklist specific countries.
+* **Anti-Bot & Anti-Exploit:**
+* Detects inhumanly fast connection attempts.
+* Blocks invalid usernames.
+* Prevents packet exploits at the proxy level.
 
-3. Starte den Proxy neu. Eine config.yml wird automatisch erstellt.
 
-4. Gehe auf proxycheck.io, registriere dich, und füg deinen api key in die config ein.
+* **Multi-Account Protection:** Limits the number of players allowed to join from the same IP address.
 
-**Konfigurations Datei**
-```
+### Discord Integration (NEW)
+
+Connect your proxy to Discord via Webhooks:
+
+* Notifications for **VPN/Bot blocks** (includes IP and username).
+* Notifications for **Maintenance Mode** status changes.
+* Fully asynchronous – your server will never lag, even if Discord is slow to respond.
+
+### Global StaffChat (NEW)
+
+Communicate with your team across all servers:
+
+* Command: `/sc <message>` or `/staffchat <message>`
+* **Toggle Mode:** Use `/sc` without arguments to automatically send all your chat messages to the staff chat.
+
+### Maintenance System
+
+* **Custom MOTD:** Displays maintenance status directly in the server list (supports color codes).
+* **Auto-Kick:** Disconnects players without permission during maintenance.
+* **Bypass:** Staff members with permission can still join.
+
+### Queue System
+
+* Redirects players to a queue server if the target server (Lobby) is full.
+* Priority support for VIPs/Staff.
+
+---
+
+## Installation
+
+1. Download the `ProxyFlow-1.4.0+dependencies.jar`.
+2. Place the file into the `plugins` folder of your Velocity Proxy.
+3. **Important:** Ensure **Java 21** is installed.
+4. Restart the proxy.
+5. Add your API key to `config.yml` and configure the Discord Webhooks.
+
+---
+
+## Configuration (config.yml)
+
+```yaml
 maintenance:
-    enabled: false
-    motd: |4-
-                       &4&lServer is in maintenance!
-            &lPlease try again later
-    kick-message: '&cThis server is currently in maintenance'
-    bypass-permission: proxyflow.maintenance.bypass
-whitelist:
-    enabled: false
-    kick-message: '&cYou are not whitelisted on this server!'
-    players: [Notch, Dinnerbone]
-    bypass-permission: proxyflow.whitelist.bypass
-queue:
-    enabled: false
-    max-players: 100
-    queue-server: queue
-    target-server: lobby
-    queue-message: '&eYou are in queue... Position: &6{position}&e/&6{total}'
-    bypass-permission: proxyflow.queue.bypass
-    priority-permissions: {proxyflow.queue.priority.high: 100, proxyflow.queue.priority.medium: 50,
-        proxyflow.queue.priority.low: 10}
-security:
-    vpn-check:
-        enabled: true
-        api-key: API KEY
-        bypass-permission: proxyflow.security.vpn.bypass
-        whitelisted-players: [ExamplePlayer1, ExamplePlayer2]
-        block-server-ips: true
-        notify-admins: true
-    country-block:
-        enabled: false
-        mode: blacklist
-        countries: [example country 1, example country 2, example country 3]
-    multi-account:
-        enabled: true
-        bypass-permission: proxyflow.security.multiaccount.bypass
-        action: kick
-        kick-message: '&cA player with your IP address is already on this server'
-        whitelisted-players: [ExamplePlayer1, ExamplePlayer2]
+  enabled: false
+  motd: "               &4&lServer is in maintenance!\n    &lPlease try again later"
+  kick-message: "&cThis server is currently in maintenance"
+  bypass-permission: "proxyflow.maintenance.bypass"
 
+whitelist:
+  enabled: false
+  kick-message: "&cYou are not whitelisted on this server!"
+  players:
+    - "Notch"
+    - "Dinnerbone"
+  bypass-permission: "proxyflow.whitelist.bypass"
+
+queue:
+  enabled: false
+  max-players: 100
+  queue-server: "queue"
+  target-server: "lobby"
+  queue-message: "&eYou are in queue... Position: &6{position}&e/&6{total}"
+  bypass-permission: "proxyflow.queue.bypass"
+  priority-permissions:
+    "proxyflow.queue.priority.high": 100
+    "proxyflow.queue.priority.medium": 50
+    "proxyflow.queue.priority.low": 10
+
+security:
+  vpn-check:
+    enabled: true
+    api-key: "YOUR_API_KEY_HERE"
+    # How long (in minutes) to cache an IP as "safe"? (Saves API requests)
+    cache-duration-minutes: 60
+    bypass-permission: "proxyflow.security.vpn.bypass"
+    whitelisted-players: []
+    block-server-ips: true
+    notify-admins: true
+
+  country-block:
+    enabled: false
+    mode: "blacklist"
+    countries:
+      - "US"
+      - "CN"
+
+  multi-account:
+    enabled: true
+    bypass-permission: "proxyflow.security.multiaccount.bypass"
+    action: "kick"
+    kick-message: "&cA player with your IP address is already on this server"
+    whitelisted-players: []
+
+discord:
+  enabled: false
+  webhook-url: "https://discord.com/api/webhooks/..."
+  notify-vpn-block: true
+  notify-maintenance: true
+
+staffchat:
+  enabled: true
+  format: "&8[&cSC&8] &e{player}&8: &f{message}"
+
+```
+
+---
+
+## Commands & Permissions
+
+| Command | Permission | Description |
+| --- | --- | --- |
+| `/proxyflow reload` | `proxyflow.command.reload` | Reloads the configuration. |
+| `/maintenance` | `proxyflow.command.maintenance` | Toggles maintenance mode on/off. |
+| `/staffchat` | `proxyflow.staffchat` | Sends a message or toggles staff chat. |
+| `/whitelist <on/off/add/remove>` | `proxyflow.command.whitelist` | Manages the whitelist. |
+| `/security <blockserverips/notify>` | `proxyflow.command.security` | Manages security settings live. |
+| **Bypass Permissions** |  |  |
+| (See Config) | `proxyflow.maintenance.bypass` | Join during maintenance. |
+| (See Config) | `proxyflow.security.vpn.bypass` | Join using a VPN. |
+| **Admin Notify** | `proxyflow.notify` | Receive ingame alerts when blocks occur. |
